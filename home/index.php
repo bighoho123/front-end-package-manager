@@ -1,3 +1,4 @@
+<?php include("../include/checkLogin.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -25,6 +26,9 @@
     <link href='../script/dataTable/css/jquery.dataTables_themeroller.css' rel='stylesheet' type='text/css'/>
     <!-- Qtip2-->
     <link href='//cdn.jsdelivr.net/qtip2/2.2.0/jquery.qtip.min.css' rel='stylesheet' type='text/css'/>
+    <!-- Selectize -->
+    <link rel="stylesheet" href="../script/selectize/css/selectize.css"/>
+    <link rel="stylesheet" href="../script/selectize/css/selectize.bootstrap3.css"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -89,7 +93,36 @@
           <h1>Overview</h1>
 
           <div class="row placeholders">
-            
+              <div class="col-sm-6">
+                  <h3>Pages</h3>
+                  <div class="col-sm-6">
+                      Total:
+                  </div>
+                  <div class="col-sm-6">
+                      <?php 
+                          $sql="SELECT COUNT(id) FROM dev_page";
+                          $res=mysqli_query($db,$sql);
+                          while($row=mysqli_fetch_array($res)){
+                            echo $row[0];
+                          }
+                      ?>
+                  </div>
+              </div>
+              <div class="col-sm-6">
+                  <h3>Packages</h3>
+                  <div class="col-sm-6">
+                      Total:
+                  </div>
+                  <div class="col-sm-6">
+                      <?php 
+                          $sql="SELECT COUNT(id) FROM dev_package";
+                          $res=mysqli_query($db,$sql);
+                          while($row=mysqli_fetch_array($res)){
+                            echo $row[0];
+                          }
+                      ?>
+                  </div>
+              </div>
           </div>
 
         </div>
@@ -106,6 +139,8 @@
     <script src="../script/dataTable/js/jquery.dataTables.min.js"></script>
     <!-- Qtip2 -->
     <script src="//cdn.jsdelivr.net/qtip2/2.2.0/jquery.qtip.min.js"></script>
+    <!-- Selectize -->
+    <script src="../script/selectize/js/selectize.js"></script>
     <!-- Custom Javascript Event -->
     <script type="text/javascript">
         // Toggle the active menu item

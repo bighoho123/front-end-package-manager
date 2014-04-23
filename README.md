@@ -10,3 +10,6 @@ Features:
 - Keep a reocrd of all the packages used
 - Maintain the relationship beetween pages and packages
 
+Requirements:
+- 2 tables in the database to store the page and package information, namely dev-page and dev-package
+- Config the include/_conn.php with your MySQL credentials

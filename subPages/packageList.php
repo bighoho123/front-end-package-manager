@@ -16,7 +16,7 @@
 			<th>Name</th>
 			<th>Version</th>
 			<th>Dependency</th>
-			<th style='width:160px;'>Action</th>
+			<th style='width:240px;'>Action</th>
 	    </tr>
 	</thead>
 	<tbody>
@@ -26,7 +26,7 @@
 				echo "<td><a target='_blank' href='".$package['website']."'>".$package['name']."</a> <i class='fa fa-file-text-o hasTooltip' style='cursor:help'></i><div class='tooltipText' style='display:none'>".$package['description']."</div></td>";
 				echo "<td>".$package['version']."</td>";
 				echo "<td>".$package['dependency']."</td>";
-				echo "<td><button type='button' class='btn btn-info' data-packageid='".$package['id']."'>Edit</button> <button type='button' class='btn btn-info' data-code='".htmlentities($package['code'])."'>Code</button></td>";
+				echo "<td><button type='button' class='btn btn-info edit-package' data-packageid='".$package['id']."'>Edit</button> <button type='button' class='btn btn-info' data-code='".htmlentities($package['code'])."'>Code</button> <button type='button' class='btn btn-danger delete-package' data-packageid='".$package['id']."'>delete</button></td>";
 				echo "</tr>";
 			}
 		?>
@@ -37,6 +37,12 @@
 	jQuery("#package-list").dataTable({
 		bPaginate:false,
 		bInfo:false,
+		aoColumns:[
+			null,
+			null,
+			null,
+			{"bSortable":false}
+		]
 	});
 	// Initialize the qTip
 	jQuery(".hasTooltip").each(function(){
@@ -51,7 +57,7 @@
 		});
 	});
 	// Bind the Edit Event
-	jQuery("[data-packageid]").click(function(event) {
+	jQuery(".edit-package").click(function(event) {
 		var packageId=jQuery(this).data('packageid');
 		var url="../subPages/addPackage.php";
 		jQuery("#result-panel").html("<div style='text-align:center'><i class='fa fa-refresh fa-spin fa-5x' style='margin-top:200px'></i></div>");
@@ -79,4 +85,26 @@
 	function copyToClipboard(text) {
 	  window.prompt("Please insert the following code to your page...", text);
 	}
+	// Bind the Delete Event
+	jQuery(".delete-package").click(function(event) {
+		var packageId=jQuery(this).data('packageid');
+		var url="../widgetFunctions/deletePackage.php";
+		jQuery.ajax({
+		  url: url,
+		  type: 'POST',
+		  dataType: 'html',
+		  data: {packageId: packageId},
+		  success: function(data, textStatus, xhr) {
+		  	if (data==1){
+			    toastr.options.positionClass="toast-bottom-right";
+			  	toastr.success("This package has been deleted.");
+			  	jQuery("[data-url='../subPages/packageList.php']").click();
+		    }
+		  },
+		  error: function(xhr, textStatus, errorThrown) {
+		    toastr.options.positionClass="toast-bottom-right";
+		    toastr.error("An error occured.");
+		  }
+		});
+	});
 </script>
