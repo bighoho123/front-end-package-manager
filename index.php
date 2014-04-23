@@ -3,12 +3,12 @@
     $username=isset($_POST['username'])?$_POST['username']:"";
     $password=isset($_POST['password'])?$_POST['password']:"";
     // Authentification
-    $loginError=false;
+    $loginError=0;
     if ($username=="admin"&&$password=="admin"){
         $_SESSION=array();
         $_SESSION['id']="admin";
-    } else if (isset($_POST)){
-        $loginError=true;
+    } else if (isset($_POST['username'])&&isset($_POST['password'])){
+        $loginError=1;
     }
     if (isset($_SESSION['id'])&&$_SESSION['id']=="admin"){
         header("Location: home/index.php");
@@ -67,7 +67,7 @@
     <!-- Toastr -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.min.js"></script>
     <script type="text/javascript">
-    if (<?php echo $loginError ?>){
+    if (<?php echo $loginError ?>==1){
       toastr.options.positionClass="toast-top-full-width";
       toastr.error("Login Failed...Please try again");
     }
