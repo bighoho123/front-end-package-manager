@@ -77,7 +77,7 @@
 <script type="text/javascript">
 	jQuery("#add-package-form-submit").click(function(event) {
 		event.preventDefault();
-		var url='../widgetFunctions/addpackage.php';
+		var url='../widgetFunctions/addPackage.php';
 		var data=jQuery("#add-package-form").serialize();
 		jQuery.ajax({
 		  url: url,
