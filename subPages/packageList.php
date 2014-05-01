@@ -23,7 +23,7 @@
 		<?php 
 			foreach($allPackages AS $package){
 				echo "<tr>";
-				echo "<td><a target='_blank' href='".$package['website']."'>".$package['name']."</a> <i class='fa fa-file-text-o hasTooltip' style='cursor:help'></i><div class='tooltipText' style='display:none'>".$package['description']."</div></td>";
+				echo "<td><a target='_blank' href='".$package['website']."'>".$package['name']."</a> <i class='fa fa-file-text-o hasTooltip' style='cursor:help'></i><div class='tooltipText' style='display:none'>".htmlentities($package['description'])."</div></td>";
 				echo "<td>".$package['version']."</td>";
 				echo "<td>".$package['dependency']."</td>";
 				echo "<td><button type='button' class='btn btn-info edit-package' data-packageid='".$package['id']."'>Edit</button> <button type='button' class='btn btn-info' data-code='".htmlentities($package['code'])."'>Code</button> <button type='button' class='btn btn-danger delete-package' data-packageid='".$package['id']."'>delete</button></td>";

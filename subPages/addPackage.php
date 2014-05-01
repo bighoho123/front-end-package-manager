@@ -60,7 +60,7 @@
 		<div class="form-group">
 			<label for='package-description' class='col-lg-2 control-label'>Description</label>
 			<div class="col-lg-8">
-				<textarea class="form-control" rows="5" name='description' id="package-description" placeholder='Anything about this package...'><?php echo $description; ?></textarea>
+				<textarea class="form-control" rows="5" name='description' id="package-description" placeholder='Anything about this package...'><?php echo htmlentities($description); ?></textarea>
 			</div>
 		</div>
 		<div class='col-lg-10'><hr></div>
